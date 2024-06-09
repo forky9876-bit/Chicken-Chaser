@@ -1,6 +1,3 @@
-# Chicken Chaser
-Created by Gabe Kotton, Audio by Sebastian FinkBeiner
-
 ![Chicken Chaser Gif: Created by Gabe Kotton, Audio by Sebastian FinkBeiner](ReadMeAssets/Intro.gif)
 
 # Course Description
