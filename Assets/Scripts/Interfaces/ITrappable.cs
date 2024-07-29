@@ -18,7 +18,7 @@ public interface ITrappable
     public void OnCaptured();
 
     //What happens when we are released?
-    public void OnReleased();
+    public void OnFreedFromCage();
 
     //What happens before capture? (We should probably disable any logic that'd interfere)
     public void OnPreCapture();

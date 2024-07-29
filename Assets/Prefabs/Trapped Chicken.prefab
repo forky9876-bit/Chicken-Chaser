@@ -61,6 +61,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -96,7 +99,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 520
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -149,7 +152,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0, z: -0.0045}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 5728303979632611906}
   m_Father: {fileID: 5660007890235901881}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &1781603004433047657
@@ -162,7 +166,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -175,3 +179,77 @@ CapsuleCollider:
   m_Height: 1.06
   m_Direction: 1
   m_Center: {x: 0, y: 0.09, z: 0}
+--- !u!1001 &7140244207264369339
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1559708067331910737}
+    m_Modifications:
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662061587206153138, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+        type: 3}
+      propertyPath: m_Name
+      value: AIChicken
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bbfb3b6670149fe4f94112c7d8dfe88f, type: 3}
+--- !u!4 &5728303979632611906 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3199869485871651065, guid: bbfb3b6670149fe4f94112c7d8dfe88f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7140244207264369339}
+  m_PrefabAsset: {fileID: 0}

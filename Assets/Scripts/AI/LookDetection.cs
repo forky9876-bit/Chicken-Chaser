@@ -32,7 +32,6 @@ namespace AI
             
             int n = Physics.OverlapSphereNonAlloc(pos, stats.VisionDistance, _maxDetections, StaticUtilities.DetectableLayer);
             if (n == 0) return;
-
             for (int i = 0; i < n; ++i)
             {
                 if (!_maxDetections[i].attachedRigidbody || !_maxDetections[i].attachedRigidbody.TryGetComponent(out IVisualDetectable detectable)) continue;
@@ -52,7 +51,6 @@ namespace AI
                     {
                         float distancePerc = 1 - (distance / stats.VisionDistance);
                         _detector.AddDetection(targetPosition, stats.SightDetectionValue(distancePerc) * detectable.GetVisibility(), EDetectionType.Visual);
-
                     }
                 }
             }

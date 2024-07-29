@@ -15,8 +15,8 @@ namespace ScriptableObjects
     [SerializeField, Min(0)] private float idleStateDetectionModifier = 1;
     [SerializeField, Min(0)] private float baseMoveSpeed = 2.5f;
     [SerializeField, Min(0)] private float chaseMoveSpeed = 4;
-    [SerializeField, Min(0)] private float rollSpeed = 6;
-    [SerializeField, Range(0,180)] private float lookRotationAngle = 10;
+    [SerializeField, Min(0)] private float rollSpeed = 12;
+    [SerializeField, Range(0,180)] private float lookRotationAngle = 15;
     [SerializeField, Min(0)] private float minIdleTime = 1;
     [SerializeField, Min(0)] private float maxIdleTime = 3;
     [SerializeField, Min(0)] private float diveDistance = 1;

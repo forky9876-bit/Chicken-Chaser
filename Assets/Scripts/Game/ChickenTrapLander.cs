@@ -59,7 +59,7 @@ public class ChickenTrapLander : MonoBehaviour
         yield return new WaitForSeconds(3);
         if (!isActiveAndEnabled) yield break;
         Destroy(gameObject);
-        _caught.OnReleased();
+        _caught.OnFreedFromCage();
     }
 
     private void OnDrawGizmosSelected()

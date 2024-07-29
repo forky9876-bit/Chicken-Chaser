@@ -24,7 +24,7 @@ namespace Game
         private void OnTriggerStay(Collider other)
         {
             //When the chicken is freed, its triggering this again, and freeing itself twice because OnTriggerStay runs on the physics ticks
-            if (_trappable != null  || !other.attachedRigidbody.TryGetComponent(out ITrappable c) || !c.CanBeTrapped() || _isOpened) return;
+            if (_trappable == null  || !other.attachedRigidbody.TryGetComponent(out ITrappable c) || !c.CanBeTrapped() || _isOpened) return;
             _currentDecayTime += Time.deltaTime * 2;
             _myMaterial.SetFloat(StaticUtilities.FillMatID, _currentDecayTime / decayTime);
             if (_currentDecayTime >= decayTime)
@@ -45,7 +45,7 @@ namespace Game
         private void FreeChicken()
         {
             _trappable.GetTransform().parent = null;
-            _trappable.OnReleased();
+            _trappable.OnFreedFromCage();
             Destroy(gameObject);
         }
 
