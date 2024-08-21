@@ -75,7 +75,7 @@ instructor with any questions they may have.
 
 # Additional Notes:
 **Installation needs to happen before the course starts.** 
-Please ensure that the student has the template installed and to keep GitHub desktop installed in case students would like to work in groups. Follow the installation guide below to get started and reach out if you have any questions at [our email](info@realprogramming.com)!
+Please ensure that the student has the template installed and to keep GitHub desktop installed in case students would like to work in groups. Follow the installation guide below to get started and reach out if you have any questions at [our email](mailto:info@realprogramming.com)!
 
 # Links
 [Play the Game](https://flamingoezpz.itch.io/chicken-chaser)
