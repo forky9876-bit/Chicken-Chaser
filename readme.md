@@ -36,28 +36,32 @@ The focus of Chicken Chaser is for students to **learn how to use Unity effectiv
   * Abstraction (Ability Base and Chicken Base)
   * Encapsulation (Shared Memory Scriptable Objects)
 * Developing Object types by determining what they CAN DO (functions) and HAVE (variables) in common
+
 ![An image showing off some of the projects code](ReadMeAssets/code.png)
 
 ## Graphics
-* Shader Basics (UVs, Noise & Dissolve Shader)
-* Making Basic particles
+* Shader Basics (UVs, Vertex, Fragment)
+* Portal Shader
+* Shield Shader ( Requires Blender [Free] )
+
 ![A gif showing the player rescuing and clucking at an AI chicken](ReadMeAssets/Clucky.gif)
 
 # Course Outline
-This course is broken down into 10 lessons. Each lesson should be completed in the span of one class, however, depending on student pacing, a lesson can be two weeks long. Students who finish early can customize the game however they’d like with the instructor's help, for instance, want the chickens to go invisible or to make new levels?
+This course is broken down into 11 lessons. Each lesson should be completed in the span of one class, however, depending on student pacing, a lesson can be two weeks long. Students who finish early can customize the game however they’d like with the instructor's help, for instance, want the chickens to go invisible or to make new levels?
 
-| Week | Topic                                            | Suggested Homework                         |
-|------|--------------------------------------------------|--------------------------------------------|
-| 1    | Character Controller and Unity Basics            |                                            |
-| 2    | Abstract Classes and Planning Abilities          |                                            |
-| 3    | Animation Controllers                            |                                            |
-| 4    | Abstract Abilities                               | Thinking about abilities that we could add |
-| 5    | Cluck, Dash and Jump!                            | Try adding custom ability                  |
-| 6    | HUD and Model View Controller                    |                                            |
-| 7    | [Flexible] Animation Events, Particles and Audio | Creating a custom particle                 |
-| 8    | Chicken AI and Navigation                        |                                            |
-| 9    | Chicken AI cont. and Observer Pattern            |                                            |
-| 10   | HUD finalization and Completion                  |                                            |
+| Week | Topic                                    | Suggested Homework                                  |
+|------|------------------------------------------|-----------------------------------------------------|
+| 1    | Character Controller and Unity Basics    |                                                     |
+| 2    | Abstract Classes and Animation           | Thinking about abilities that we could add          |
+| 3    | Abstract Abilities                       |                                                     |
+| 4    | HUDs and UI w/ Observer and MVC Patterns | Create a new UI element                             |
+| 5    | [FLEXIBLE] Scriptable Objects            | Try adding custom ability                           |
+| 6    | AI Chickens                              | Create a collectable that only the player can get   |
+| 7    | Observer Pattern for Chickens            | Make the UI observe when a collectable is collected |
+| 8    | Full HUD integration                     | Display when that Collectable is collected          |
+| 9    | End Game                                 |                                                     |
+| 10   | [FLEXIBLE] Portal Ability                | Try adding a new ability, or modifying a shader     |
+| 11   | [FLEXIBLE] Shield Ability                |                                                     |
 
 # Instructional Method
 Students participate in Live Virtual Sessions through a video program called Zoom.
