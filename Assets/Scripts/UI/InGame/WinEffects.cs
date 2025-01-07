@@ -1,5 +1,4 @@
 using Characters;
-using Characters.Chicken;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -15,17 +14,19 @@ public class WinEffects : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerChicken.OnPlayerEscaped += OnGameWon;
+        print("IMPLEMENT WIN EFFECTS");
+
+        //PlayerChicken.onPlayerEscaped += OnGameWon;
     }
 
     private void OnDisable()
     {
-        PlayerChicken.OnPlayerEscaped -= OnGameWon;
+        //PlayerChicken.onPlayerEscaped -= OnGameWon;
     }
 
     private void OnGameWon(Vector3 _)
     {
         _cam.enabled = true;
-       // transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Globalization;
-using Characters.Chicken;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -64,11 +63,12 @@ public class ScoreManager : MonoBehaviour
     //These need to be enabled as the developer adds them...
     private void OnEnable()
     {
-        
+        print("Fix Score");
+        /*
         PlayerChicken.OnPlayerCaught += LoseGame;
         PlayerChicken.OnPlayerRescued += OnPlayerRescued;
         PlayerChicken.OnPlayerEscaped += WinGame;
-        
+        */
         SettingsManager.SaveFile.onUIScaleChanged += OnUIScaleChanged;
         SettingsManager.SaveFile.onUIScaleChanged += OnUIScaleChanged;
     }
@@ -76,10 +76,11 @@ public class ScoreManager : MonoBehaviour
     private void OnDisable()
     {
         
+        /*
         PlayerChicken.OnPlayerCaught -= LoseGame;
         PlayerChicken.OnPlayerRescued -= OnPlayerRescued;
         PlayerChicken.OnPlayerEscaped -= WinGame;
-        
+        */
         SettingsManager.SaveFile.onUIScaleChanged -= OnUIScaleChanged;
     }
 

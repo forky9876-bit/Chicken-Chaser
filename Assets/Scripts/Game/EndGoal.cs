@@ -1,5 +1,4 @@
 using Characters;
-using Characters.Chicken;
 using UnityEngine;
 
 public class EndGoal : MonoBehaviour
@@ -12,7 +11,7 @@ public class EndGoal : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         print("Fix End Goal Script");
-        
+        /*
         //If they're not a desired layer.
         if (((1 << other.gameObject.layer) & allowedLayers) == 0) return;
         
@@ -20,6 +19,6 @@ public class EndGoal : MonoBehaviour
         {
             c.OnEscaped(moveToLocation.position);
         }
-        
+        */
     }
 }
