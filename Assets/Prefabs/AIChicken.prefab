@@ -134,7 +134,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5662061587206153138}
   m_Enabled: 1
-  m_AgentTypeID: 1479372276
+  m_AgentTypeID: -334000983
   m_Radius: 0.2
   m_Speed: 3.5
   m_Acceleration: 8
@@ -157,15 +157,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5662061587206153138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e9931c37f6d96542994554d92d1c28d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bbe2fce82a68f5419982f0c7878c716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 03f8222ea282f624090807125a2c0276, type: 2}
   head: {fileID: 2734304907029226763}
   foot: {fileID: 821473674308985966}
-  stats: {fileID: 11400000, guid: 14e5e61f756a0664a9978c47d4bc3796, type: 2}
   landEffect: {fileID: 3095555676156603147}
   activeHearing: {fileID: 11400000, guid: bea74cc03f6df55409ece03fb1d40aba, type: 2}
-  inactiveHearing: {fileID: 11400000, guid: f311eddf2139e5a49ab7f10851849625, type: 2}
 --- !u!1 &8273480113772969671
 GameObject:
   m_ObjectHideFlags: 0

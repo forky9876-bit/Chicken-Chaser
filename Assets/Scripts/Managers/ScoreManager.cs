@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Globalization;
-using Characters.Chicken;
 using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[DefaultExecutionOrder(-1000)]
 public class ScoreManager : MonoBehaviour
 {
     
@@ -64,7 +64,6 @@ public class ScoreManager : MonoBehaviour
     //These need to be enabled as the developer adds them...
     private void OnEnable()
     {
-        
         PlayerChicken.OnPlayerCaught += LoseGame;
         PlayerChicken.OnPlayerRescued += OnPlayerRescued;
         PlayerChicken.OnPlayerEscaped += WinGame;
@@ -75,7 +74,6 @@ public class ScoreManager : MonoBehaviour
 
     private void OnDisable()
     {
-        
         PlayerChicken.OnPlayerCaught -= LoseGame;
         PlayerChicken.OnPlayerRescued -= OnPlayerRescued;
         PlayerChicken.OnPlayerEscaped -= WinGame;
@@ -106,9 +104,7 @@ public class ScoreManager : MonoBehaviour
         timeSpent.text = $"{s.Minutes}m {s.Seconds}s {s.Milliseconds}ms";
         finalScore.text = ((_cachedDidWin?1 - scoreCurve.Evaluate(_cachedTime / expectedEndTime):0) * maximumTimePoints + (pointsPerSavedChicken * GameManager.NumChickensSaved)).ToString(CultureInfo.InvariantCulture);
 
-        bool x = true;
-        //bool x = AiChicken.NumActiveAIChickens() == 0;
-        
+        bool x = AiChicken.NumActiveAIChickens() == 0;
         //Determine which button to show
         hopeIsNotLost.SetActive(!x);
         mainMenu.gameObject.SetActive(x);

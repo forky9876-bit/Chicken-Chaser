@@ -1,19 +1,25 @@
 using UnityEngine;
 
-namespace ScriptableObjects
+[CreateAssetMenu(fileName = "ChickenStats", menuName = "ChickenChaser/ChickenStats", order = 100)]
+public class ChickenStats : ScriptableObject
 {
-    [CreateAssetMenu(fileName = "ChickenStats", menuName = "ChickenChaser/ChickenStats")]
-    public class ChickenStats : ScriptableObject
-    {
-        [SerializeField] private float moveSpeed = 20f;
-        [SerializeField] private float maxSpeed = 20f;
-        [SerializeField] private float footDistance;
-        [SerializeField] private float footRadius;
+    [Header("Movement")]
+    [SerializeField] protected float speed;
+    [SerializeField] protected float maxSpeed;
+    
+    [Header("Foot Management")] 
+    [SerializeField] protected float footRadius;
+    [SerializeField] protected float footDistance;
 
-        //Sometimes called Properties Getters (Readonly variables)
-        public float MoveSpeed => moveSpeed;
-        public float FootDistance => footDistance;
-        public float FootRadius => footRadius;
-        public float MaxSpeed => maxSpeed;
-    }
+    [Header("Audio")]
+    [SerializeField] private AudioClip caughtSound;
+    [SerializeField] private AudioClip escapedSound;
+
+    public float Speed => speed;
+    public float MaxSpeed => maxSpeed;
+    public float FootRadius => footRadius;
+    public float FootDistance => footDistance;
+
+    public AudioClip CaughtSound => caughtSound;
+    public AudioClip EscapedSound => escapedSound;
 }

@@ -1,165 +1,158 @@
-using System;
+using AI;
+using Characters;
 using Interfaces;
+using Managers;
 using ScriptableObjects;
 using UnityEngine;
 using Utilities;
-using Random = UnityEngine.Random;
 
-namespace Characters.Chicken
+public abstract class Chicken : MonoBehaviour, IVisualDetectable, ITrappable
 {
-    public abstract class Chicken : MonoBehaviour, ITrappable, IVisualDetectable
+    [SerializeField] protected ChickenStats stats;
+    
+    [Header("Objects")] 
+    [SerializeField] protected Transform head;
+    [SerializeField] protected Transform foot;
+
+    [SerializeField] private ParticleSystem landEffect;
+
+    protected AudioSource Audio;
+    protected Rigidbody PhysicsBody;
+    protected Animator AnimatorController;
+    protected Collider BodyCollider;
+    protected bool IsGrounded;
+    
+    protected float currentSpeed;
+    protected float currentFallTIme;
+    protected Vector3 slopeNormal;
+    
+    protected float Visibility = 1;
+
+    
+    protected virtual void Awake()
     {
-        protected Animator animator;
-        protected Rigidbody rb;
+        PhysicsBody = GetComponent<Rigidbody>();
+        AnimatorController = GetComponentInChildren<Animator>();
+        BodyCollider = GetComponentInChildren<Collider>();
+        Audio = GetComponentInChildren<AudioSource>();
         
-        [SerializeField] protected Transform head;
-        [SerializeField] protected Transform foot;
-        [SerializeField] protected ChickenStats stats;
+        ChickenAnimatorReceiver car = transform.GetChild(0).GetComponent<ChickenAnimatorReceiver>();
+        car.OnLandEffect += HandleLanding;
+    }
 
-        [SerializeField] private ParticleSystem landEffect;
-        protected Collider bodyCollider;
-        
-        private ChickenAnimatorReceiver _animatorReceiver;
+    private void FixedUpdate()
+    {
+        HandleGroundState();
+        HandleMovement();
+        HandleAnims();
+    }
 
-        protected float Visibility = 1;
 
-        protected float airTime;
-        
-        public bool IsGrounded { get; private set; }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        protected virtual void Awake()
+    private void HandleGroundState()
+    {
+        //We're going to spherecast downwards, and detect if we've hit the floor.
+        //Basic Spherecast check, NOTE: StaticUtilites.GroundLayers helps the code know which layers to look at for floors.
+        // Preventing players from registering grounded on illegal objects.
+        bool newGroundedState = Physics.SphereCast(foot.position, stats.FootRadius, Vector3.down, out RaycastHit slope, stats.FootDistance, StaticUtilities.GroundLayers);
+       
+        //If the ground state is different
+        if (newGroundedState != IsGrounded)
         {
-            animator = GetComponentInChildren<Animator>();
-            rb = GetComponent<Rigidbody>();
-            _animatorReceiver = GetComponentInChildren<ChickenAnimatorReceiver>();
-            _animatorReceiver.OnLandEffect += OnLanded;
-        }
+            //We should enter that state
+            IsGrounded = newGroundedState;
+            //Then we should update our grounded state.
+            AnimatorController.SetBool(StaticUtilities.IsGroundedAnimID, IsGrounded);
 
-        // Update is called once per frame
-        void Update()
-        {
-            HandleAnimations();
-        }
-
-        private void FixedUpdate()
-        {
-            float dt = Time.deltaTime;
-            GroundCheck(dt);
-            HandleMoving(dt);
-        }
-
-
-        protected abstract void HandleMoving(float deltaTime);
-
-        protected virtual void HandleAnimations()
-        {
-            animator.SetFloat(StaticUtilities.MoveSpeedAnimID, GetCurrentSpeed());
-            animator.SetBool(StaticUtilities.IsGroundedAnimID, IsGrounded);
-        }
-
-        public abstract float GetCurrentSpeed();
-
-        private void GroundCheck(float deltaTime)
-        {
-            bool currentState = Physics.SphereCast(foot.position, stats.FootRadius, Vector3.down, out RaycastHit hit, stats.FootDistance,  StaticUtilities.GroundLayers);
-
-            if (!currentState)
+            //If we were falling
+            if (currentFallTIme >= 0)
             {
-                airTime += deltaTime;
+                //Handle Landing
+                HandleLanding(Mathf.Max(currentFallTIme / 2, 3)); // Arbitrarily limit effects
+                currentFallTIme = 0;
             }
-
-            if (currentState != IsGrounded)
-            {
-                IsGrounded = currentState;
-                _animatorReceiver.OnLandEffect.Invoke(airTime);
-                airTime = 0;
-            }
-
         }
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = IsGrounded?Color.green : Color.red;
+        //If we're not grounded then update the air time
+        if (!IsGrounded) currentFallTIme += Time.deltaTime;
+        //If we are grounded keep track of the slope normal so that Movement is smoother.
+        else slopeNormal = slope.normal;
+    }
+
+    protected virtual void HandleLanding(float force)
+    {
+        landEffect.emission.SetBurst(0, new ParticleSystem.Burst(0, Random.Range(10,20) * force));
+        landEffect.Play();
             
-            GizmosExtras.DrawWireSphereCast(foot.position , Vector3.down, 
-                stats.FootDistance, stats.FootRadius);
-        }
-        
-        public Vector3 GetDirection() => head.forward;
-
-        public Transform GetTransform()
-        {
-            return transform;
-        }
-
-        public virtual bool CanBeTrapped()
-        {
-            return true;
-        }
-
-        public virtual void OnCaptured()
-        {
+        //If we missed, we can't possibly find a clip...
+        Vector3 pos = foot.position;
+            
+        //Make sure hit is not null
+        if (!Physics.SphereCast(pos, stats.FootRadius, Vector3.down, out RaycastHit hit, stats.FootDistance,StaticUtilities.GroundLayers)) return;
            
-        }
 
-        public virtual void OnFreedFromCage()
-        {
-            enabled = true;
-        }
-
-        public virtual void OnPreCapture()
-        {
-            enabled = false;
-        }
-
-        public void AddVisibility(float visibility)
-        {
-            Visibility += visibility;
-        }
-
-        public void RemoveVisibility(float visibility)
-        {
-            Visibility = Mathf.Max(0, Visibility - visibility);
-        }
-
-        public float GetVisibility()
-        {
-            return Visibility;
-        }
-
-
-        private void OnLanded(float strength)
-        {
-            landEffect.emission.SetBurst(0,  new ParticleSystem.Burst()
-            {
-                count = Mathf.Clamp(Random.Range(5,15) * strength, 5, 50)
-            });
-            var main = landEffect.main;
-            main.startSpeed = new ParticleSystem.MinMaxCurve(0.5f, Mathf.Clamp(strength / 5, 1, 2));
-            landEffect.Play();
-        }
-
-        private void OnDestroy()
-        {
-            _animatorReceiver.OnLandEffect -= OnLanded;
-        }
-
-        public virtual void OnEscaped(Vector3 position)
-        {
             
-        }
+        //Make sure the layer is not null
+        if (!GameManager.SoundsDictionary.TryGetValue(hit.transform.tag, out AudioVolumeRangeSet set)) return;
+        Audio.pitch = Random.Range(0.8f, 1.2f);
+        //Play the desired audio + detection
+        Audio.PlayOneShot(set.clip, set.volume);
+        AudioDetection.onSoundPlayed.Invoke(pos, set.volume, set.rangeMultiplier * force, EAudioLayer.Chicken);
+    }
 
-        protected virtual void OnEnable()
-        {
-            bodyCollider ??= GetComponentInChildren<Collider>();
-            bodyCollider.enabled = true;
-        }
+    protected virtual void HandleAnims()
+    {
+        AnimatorController.SetFloat(StaticUtilities.MoveSpeedAnimID, currentSpeed);
+    }
 
-        protected virtual void OnDisable()
-        {
-            bodyCollider.enabled = false;
-        }
+    protected abstract void HandleMovement();
+    
+    public abstract void OnFreedFromCage();
+    
+    public abstract void OnEscaped(Vector3 position);
+    public void OnPreCapture()
+    {
+        enabled = false;
+    }
 
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public bool CanBeTrapped()
+    {
+        return isActiveAndEnabled;
+    }
+
+    public abstract void OnCaptured();
+    
+    public bool GetIsGrounded()
+    {
+        return IsGrounded;
+    }
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
+
+    public Vector3 GetLookDirection()
+    {
+        return head.forward;
+    }
+
+    public void AddVisibility(float visibility)
+    {
+        Visibility += visibility;
+    }
+
+    public void RemoveVisibility(float visibility)
+    {
+        Visibility -= Mathf.Max(0,visibility);
+    }
+
+    public float GetVisibility()
+    {
+        return Visibility;
     }
 }
