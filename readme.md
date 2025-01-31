@@ -36,14 +36,11 @@ The focus of Chicken Chaser is for students to **learn how to use Unity effectiv
   * Abstraction (Ability Base and Chicken Base)
   * Encapsulation (Shared Memory Scriptable Objects)
 * Developing Object types by determining what they CAN DO (functions) and HAVE (variables) in common
-
 ![An image showing off some of the projects code](ReadMeAssets/code.png)
 
 ## Graphics
-* Shader Basics (UVs, Vertex, Fragment)
-* Portal Shader
-* Shield Shader ( Requires Blender [Free] )
-
+* Shader Basics (UVs, Noise & Dissolve Shader)
+* Making Basic particles
 ![A gif showing the player rescuing and clucking at an AI chicken](ReadMeAssets/Clucky.gif)
 
 # Course Outline

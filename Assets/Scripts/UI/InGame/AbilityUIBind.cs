@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class AbilityUIBind : MonoBehaviour
 {
-    
+    /*
     [SerializeField] private CustomButton abilityButton;
     [SerializeField] private Image abilityFillBar;
     [SerializeField] private Image abilityIcon;
@@ -34,5 +34,5 @@ public class AbilityUIBind : MonoBehaviour
         abilityFillBar.fillAmount = _targetAbility.GetCooldownPercent(); //You may need to rename GetReadyPercent() to GetCooldownPercent()
         abilityButton.interactable = _targetAbility.CanActivate();
     }
-    
+    */
 }
