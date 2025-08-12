@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 4450424102145099836}
   serializedVersion: 2
   m_LocalRotation: {x: 0.056563873, y: 0.93978417, z: -0.19178556, w: 0.27717257}
-  m_LocalPosition: {x: 0.3, y: 0.275, z: 0.0039818287}
+  m_LocalPosition: {x: 0.3, y: 0.275, z: -0.56811833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -130,7 +130,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1
     IgnoreTag: Player
-    CameraRadius: 0.2
+    CameraRadius: 0.1
     DampingIntoCollision: 0
     DampingFromCollision: 0
 --- !u!1 &5662061587206153138
@@ -212,7 +212,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0da38eafd8a0a444a9de6ffe95897f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9.424778
+  speed: 7.402204
+  maxSpeed: 7.402204
+  footRadius: 1
+  footDistance: 1
+  asLongAsItHasTheWordHeadInItItIsFine: {fileID: 2734304907029226763}
+  ylookSpeedski: 5
+  andThisIsOurPitchLimitSo: 30
 --- !u!1 &8273480113772969671
 GameObject:
   m_ObjectHideFlags: 0
