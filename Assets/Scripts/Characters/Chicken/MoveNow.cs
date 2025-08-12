@@ -1,16 +1,13 @@
 using System;
 using UnityEngine;
 
-public class MoveNow : MonoBehaviour
+public class MoveNow : Checkin
 {
     private Vector3 _comeUpWithOneOfYourCreativeNamesYourself;
-    
-    protected Rigidbody jerry;
-    [SerializeField]float speed = 1;
     // Awake is called once before before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    protected override void Awake()
     {
-        jerry = GetComponent<Rigidbody>();
+        base.Awake();
         PIayerControIs.Initialize(this);
         PIayerControIs.UseGameControls();
     }
@@ -20,7 +17,7 @@ public class MoveNow : MonoBehaviour
     {
         Move();
     }
-    void Move()
+    protected override void Move()
     {
         jerry.AddForce(transform.rotation * _comeUpWithOneOfYourCreativeNamesYourself * speed, ForceMode.Acceleration);
     }
