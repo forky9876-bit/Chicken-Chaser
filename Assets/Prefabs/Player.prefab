@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 8952916539750642181}
   - component: {fileID: 297893113259497690}
   - component: {fileID: 7043854760380808807}
+  - component: {fileID: 6842707927427293171}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -224,7 +225,7 @@ MonoBehaviour:
   asLongAsItHasTheWordHeadInItItIsFine: {fileID: 2734304907029226763}
   andThisOneIsGoingToBeForOurFeet: {fileID: 821473674308985966}
   ylookSpeedski: 5
-  andThisIsOurPitchLimitSo: 30
+  andThisIsOurPitchLimitSo: 75
   jumpAbility: {fileID: 6297947706847276491}
   dashAbility: {fileID: 8952916539750642181}
   cluckAbility: {fileID: 3662785410310839170}
@@ -243,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconicIcon: {fileID: 21300000, guid: a47bf4bfcd00d7e46a27a3f5e4452ae0, type: 3}
   canBeHeld: 0
-  cooldown: 1
+  cooldown: 0
   jumpingForce: 4.712389
 --- !u!114 &3662785410310839170
 MonoBehaviour:
@@ -277,7 +278,7 @@ MonoBehaviour:
   iconicIcon: {fileID: 21300000, guid: 742ac45aa13714c4c8de337aa6303038, type: 3}
   canBeHeld: 0
   cooldown: 1
-  dashDistance: 2.5
+  dashDistance: 30
   dashDuration: 0.2
   feathers: {fileID: 6544793656298120032}
 --- !u!114 &297893113259497690
@@ -310,6 +311,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseGravityScale: 1
+--- !u!114 &6842707927427293171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5662061587206153138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457722cba2b6ada44be1fd52150c80a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8273480113772969671
 GameObject:
   m_ObjectHideFlags: 0

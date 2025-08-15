@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using Utilities;
 
@@ -29,7 +30,7 @@ public class DashAbility : AbstractAbility
     private IEnumerator ActivateAbility(Vector3 direction)
     {
         //Do not dash upwards.
-        direction = new Vector3(direction.x, 0, direction.z) * dashDistance;
+        direction = new Vector3(direction.x, direction.y, direction.z) * dashDistance;
         _canDash = false;
 
         //Find the highest point on a slope
@@ -70,16 +71,18 @@ public class DashAbility : AbstractAbility
         Debug.DrawLine(origin, endPoint, Color.magenta, 5);
         float curTime = 0;
         //Lock the rigidbody physics
-        _rb.isKinematic = true;
+        // _rb.isKinematic = true;
+        _rb.linearVelocity = Vector3.zero;
         while (curTime < dashDuration)
         {
             curTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, endPoint, curTime / dashDuration);
+            _rb.AddForce(direction * dashDistance, ForceMode.Acceleration);
+            // transform.position = Vector3.Lerp(transform.position, endPoint, curTime / dashDuration);
             yield return null;
         }
-        transform.position = Vector3.Lerp(transform.position, endPoint, 1);
+        // transform.position = Vector3.Lerp(transform.position, endPoint, 1);
         //Unlock the rigidbody physics
-        _rb.isKinematic = false;
+        // _rb.isKinematic = false;
         feathers.Stop();
         _canDash = true;
 

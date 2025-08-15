@@ -1,8 +1,9 @@
 using System;
+using Interfaces;
 using UnityEngine;
 using Utilities;
 
-public abstract class Checkin : MonoBehaviour
+public abstract class Checkin : MonoBehaviour, IVisualDetectable
 {
     [Header("theTitleForTheseTwoValues")]
     [SerializeField] protected float speed = Mathf.PI * 3f;
@@ -18,6 +19,7 @@ public abstract class Checkin : MonoBehaviour
     protected bool isGrounded;
     protected float currentSpeed;
     protected float currentFallTime;
+    protected float visibility = 1;
     protected Vector3 slopeNormal;
     protected virtual void Awake()
     {
@@ -77,5 +79,20 @@ public abstract class Checkin : MonoBehaviour
     public Vector3 GetLookDirection()
     {
         return asLongAsItHasTheWordHeadInItItIsFine.forward;
+    }
+
+    public void AddVisibility(float visibility)
+    {
+        this.visibility += visibility;
+    }
+
+    public void RemoveVisibility(float visibility)
+    {
+        this.visibility -= Mathf.Max(0, visibility);
+    }
+
+    public float GetVisibility()
+    {
+        return visibility;
     }
 }
