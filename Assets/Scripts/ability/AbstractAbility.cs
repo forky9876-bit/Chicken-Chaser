@@ -34,6 +34,7 @@ public abstract class AbstractAbility : MonoBehaviour
     }
     public void StopAbility()
     {
+        Deactivate();
         _isBeingHeld = false;
         if (IsBoolAnimation())
         {
@@ -91,6 +92,7 @@ public abstract class AbstractAbility : MonoBehaviour
         return _isReady;
     }
     protected abstract void Activate();
+    protected virtual void Deactivate(){}
     public virtual void ForceCancelAbility()
     {
         _currentCooldownTime = cooldown;

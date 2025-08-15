@@ -12,9 +12,13 @@ public abstract class Checkin : MonoBehaviour
     [SerializeField] protected float footDistance = 1;
     [Header("objectses")]
     [SerializeField] protected Transform asLongAsItHasTheWordHeadInItItIsFine;
+    [SerializeField] protected Transform andThisOneIsGoingToBeForOurFeet;
     protected Rigidbody jerry;
     protected Animator whatAreWeGoingToCallIt;
     protected bool isGrounded;
+    protected float currentSpeed;
+    protected float currentFallTime;
+    protected Vector3 slopeNormal;
     protected virtual void Awake()
     {
         jerry = GetComponent<Rigidbody>();
@@ -31,7 +35,25 @@ public abstract class Checkin : MonoBehaviour
     protected abstract void Move();
     private void HandleGroundState()
     {
-
+        bool didWeHitSomethingIDontKnow = Physics.SphereCast(andThisOneIsGoingToBeForOurFeet.position, footRadius, Vector3.down, out RaycastHit slope, footDistance, StaticUtilities.GroundLayers);
+        if (didWeHitSomethingIDontKnow != isGrounded)
+        {
+            isGrounded = didWeHitSomethingIDontKnow;
+            whatAreWeGoingToCallIt.SetBool(StaticUtilities.IsGroundedAnimID, isGrounded);
+            if (currentFallTime > 0)
+            {
+                HandleLanding();
+                currentFallTime = 0;
+            }
+        }
+        if (isGrounded)
+        {
+            slopeNormal = slope.normal;
+        }
+        else
+        {
+            currentSpeed += Time.fixedDeltaTime;
+        }
     }
     protected virtual void HandleLanding()
     {
@@ -39,9 +61,21 @@ public abstract class Checkin : MonoBehaviour
     }
     protected virtual void AsLongAsItHasTheWordAnimationOrAnimsOrSomethingLikeThat()
     {
-        whatAreWeGoingToCallIt.SetFloat(StaticUtilities.MoveSpeedAnimID, jerry.linearVelocity.magnitude);
+        whatAreWeGoingToCallIt.SetFloat(StaticUtilities.MoveSpeedAnimID, currentSpeed);
     }
     public abstract void OnFreedFromCage();
     public abstract void OnEscaped(Vector3 position);
     public abstract void OnCaptured();
+    public bool GetIsGrounded()
+    {
+        return isGrounded;
+    }
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
+    public Vector3 GetLookDirection()
+    {
+        return asLongAsItHasTheWordHeadInItItIsFine.forward;
+    }
 }

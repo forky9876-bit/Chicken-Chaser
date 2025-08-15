@@ -9,32 +9,82 @@ public class MoveNow : Checkin
     private Vector3 _comeUpWithOneOfYourCreativeNamesYourself;
     private Vector2 _youCanCallItWhateverYouWant;
     float pitch;
+    [Header("hwat are we gonna call it?")]
+    [SerializeField] private AbstractAbility jumpAbility;
+    [SerializeField] private AbstractAbility dashAbility;
+    [SerializeField] private AbstractAbility cluckAbility;
+    [SerializeField] private AbstractAbility glihAbility;
     // Awake is called once before before the first execution of Update after the MonoBehaviour is created
     protected override void Awake()
     {
         base.Awake();
+        HUD.Instance.BindPlayer(this);
         PIayerControIs.Initialize(this);
         PIayerControIs.UseGameControls();
     }
     protected override void Move()
     {
-        jerry.AddForce(transform.rotation * _comeUpWithOneOfYourCreativeNamesYourself * speed, ForceMode.Acceleration);
+        Vector3 direction = _comeUpWithOneOfYourCreativeNamesYourself;
+        if (isGrounded)
+        {
+            direction = Vector3.ProjectOnPlane(direction, slopeNormal);
+        }
+        jerry.AddForce(transform.rotation * direction * speed, ForceMode.Acceleration);
+
+        Vector2 horizontalVelocity = new Vector2(jerry.linearVelocity.x, jerry.linearVelocity.z);
+        currentSpeed = horizontalVelocity.magnitude;
+        if (currentSpeed > maxSpeed)
+        {
+            horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
+            jerry.linearVelocity = new Vector3(horizontalVelocity.x, jerry.linearVelocity.y, horizontalVelocity.y);
+            currentSpeed = maxSpeed;
+        }
+
         HandleLookingButYouCanCallItWhateverYopWant();
     }
 
     public void SetCluckState(bool v)
     {
-        Debug.Log("cluck " + v);
+        if (v)
+        {
+            cluckAbility.StartAbility();
+        }
+        else
+        {
+            cluckAbility.StopAbility();
+        }
     }
 
     public void SetJumpState(bool v)
     {
-        Debug.Log("Jump " + v);
+        if (v)
+        {
+            if (isGrounded)
+            {
+                jumpAbility.StartAbility();
+            }
+            else
+            {
+                glihAbility.StartAbility();
+            }
+        }
+        else
+        {
+            jumpAbility.StopAbility();
+            glihAbility.StopAbility();
+        }
     }
 
     public void SetDashState(bool v)
     {
-        Debug.Log("dash " + v);
+        if (v)
+        {
+            dashAbility.StartAbility();
+        }
+        else
+        {
+            dashAbility.StopAbility();
+        }
     }
 
     public void AnythingYouWant(Vector2 vector2)
@@ -67,5 +117,29 @@ public class MoveNow : Checkin
     public override void OnCaptured()
     {
 
+    }
+    public void OnDisable()
+    {
+        PIayerControIs.DisablePIayer();
+        jumpAbility.ForceCancelAbility();
+        dashAbility.ForceCancelAbility();
+        cluckAbility.ForceCancelAbility();
+        glihAbility.ForceCancelAbility();
+    }
+    public AbstractAbility GetClucking()
+    {
+        return cluckAbility;
+    }
+    public AbstractAbility GetToJumping()
+    {
+        return jumpAbility;
+    }
+    public AbstractAbility ADashOfPepper()
+    {
+        return dashAbility;
+    }
+    public AbstractAbility GetGLIH()
+    {
+        return glihAbility;
     }
 }

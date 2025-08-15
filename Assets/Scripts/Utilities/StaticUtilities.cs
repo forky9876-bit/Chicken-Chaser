@@ -34,6 +34,7 @@ namespace Utilities
         public static readonly int CluckAnimID = Animator.StringToHash("IsDancing");
         public static readonly int JumpAnimID = Animator.StringToHash("Jump");
         public static readonly int DashAnimID = Animator.StringToHash("Dash");
+        public static readonly int GlihAnimID = Animator.StringToHash("isGlih");
         
         public static readonly int IsGroundedAnimID = Animator.StringToHash("isGrounded");
         public static readonly int IsSearchingAnimID = Animator.StringToHash("isSearching");
