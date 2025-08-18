@@ -1,9 +1,10 @@
 using System;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Utilities;
 
-public abstract class Checkin : MonoBehaviour, IVisualDetectable
+public abstract class Checkin : MonoBehaviour, IVisualDetectable, ITrappable
 {
     [Header("theTitleForTheseTwoValues")]
     [SerializeField] protected float speed = Mathf.PI * 3f;
@@ -14,6 +15,7 @@ public abstract class Checkin : MonoBehaviour, IVisualDetectable
     [Header("objectses")]
     [SerializeField] protected Transform asLongAsItHasTheWordHeadInItItIsFine;
     [SerializeField] protected Transform andThisOneIsGoingToBeForOurFeet;
+    protected Collider bodyCoIIlder;
     protected Rigidbody jerry;
     protected Animator whatAreWeGoingToCallIt;
     protected bool isGrounded;
@@ -23,6 +25,7 @@ public abstract class Checkin : MonoBehaviour, IVisualDetectable
     protected Vector3 slopeNormal;
     protected virtual void Awake()
     {
+        bodyCoIIlder = GetComponentInChildren<Collider>();
         jerry = GetComponent<Rigidbody>();
         whatAreWeGoingToCallIt = GetComponentInChildren<Animator>();
     }
@@ -94,5 +97,40 @@ public abstract class Checkin : MonoBehaviour, IVisualDetectable
     public float GetVisibility()
     {
         return visibility;
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public bool CanBeTrapped()
+    {
+        return isActiveAndEnabled;
+    }
+
+    public void OnPreCapture()
+    {
+        enabled = false;
+    }
+    protected virtual void OnEnable()
+    {
+        SetComponentsActive(true);
+        visibility = 1;
+    }
+    protected virtual void OnDisable()
+    {
+        SetComponentsActive(false);
+        currentSpeed = 0;
+        AsLongAsItHasTheWordAnimationOrAnimsOrSomethingLikeThat();
+        visibility = 0;
+    }
+    protected virtual void SetComponentsActive(bool active)
+    {
+        bodyCoIIlder.enabled = active;
+        if (jerry != null)
+        {
+            jerry.isKinematic = !active;
+        }
     }
 }

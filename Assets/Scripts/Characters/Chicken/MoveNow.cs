@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
+using Utilities;
 
 public class MoveNow : Checkin
 {
@@ -8,6 +10,9 @@ public class MoveNow : Checkin
     [SerializeField, Range(0, 90)] private float andThisIsOurPitchLimitSo = 30;
     private Vector3 _comeUpWithOneOfYourCreativeNamesYourself;
     private Vector2 _youCanCallItWhateverYouWant;
+    public static Action OnPlayerRescued;
+    public static Action<Vector3> OnPlayerCaught;
+    public static Action<Vector3> OnPlayerEscaped;
     float pitch;
     [Header("hwat are we gonna call it?")]
     [SerializeField] private AbstractAbility jumpAbility;
@@ -106,20 +111,35 @@ public class MoveNow : Checkin
     }
     public override void OnFreedFromCage()
     {
-
+        OnPlayerRescued?.Invoke();
+        cluckAbility.StopAbility();
     }
 
     public override void OnEscaped(Vector3 position)
     {
-
+        OnPlayerEscaped?.Invoke(transform.position);
+        print("yey win");
+        NavMeshAgent agingt;
+        agingt = gameObject.AddComponent<NavMeshAgent>();
+        agingt.enabled = true;
+        agingt.baseOffset = .16f;
+        agingt.height = .32f;
+        agingt.radius = .2f;
+        agingt.agentTypeID = 0;
+        agingt.SetDestination(position);
+        whatAreWeGoingToCallIt.SetFloat(StaticUtilities.MoveSpeedAnimID, maxSpeed);
+        enabled = false;
     }
 
     public override void OnCaptured()
     {
-
+        Debug.Log("Oh no, what ever are we going to do");
+        cluckAbility.StartAbility();
+        OnPlayerCaught?.Invoke(transform.position);
     }
-    public void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         PIayerControIs.DisablePIayer();
         jumpAbility.ForceCancelAbility();
         dashAbility.ForceCancelAbility();
@@ -141,5 +161,10 @@ public class MoveNow : Checkin
     public AbstractAbility GetGLIH()
     {
         return glihAbility;
+    }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        PIayerControIs.UseGameControls();
     }
 }
