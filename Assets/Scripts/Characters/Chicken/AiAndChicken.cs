@@ -13,7 +13,7 @@ public class AiAndChicken : Checkin, IDetector
     private AudioDetection _underscore;
     private NavMeshAgent _agentNav;
     [SerializeField] private HearStats it;
-    private int chickensEscaped;
+    public static int chickensEscaped;
     protected override void Awake()
     {
         base.Awake();
@@ -34,6 +34,7 @@ public class AiAndChicken : Checkin, IDetector
         Debug.Log("hey, i'm escapin' here", gameObject);
         MoveTo(position);
         visibility = 0;
+        chickensEscaped++;
         StartCoroutine(CheckForEscape());
 
     }
