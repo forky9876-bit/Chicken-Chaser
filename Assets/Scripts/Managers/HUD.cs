@@ -1,4 +1,6 @@
+using UnityEngine.UI;
 using UnityEngine;
+using System.Collections.Generic;
 [DefaultExecutionOrder(-1000)]
 public class HUD : MonoBehaviour
 {
@@ -7,8 +9,16 @@ public class HUD : MonoBehaviour
     [SerializeField] private AbilityUIBind dash;
     [SerializeField] private AbilityUIBind cluck;
     [SerializeField] private AbilityUIBind glih;
-    public static HUD Instance {
-        get;private set;
+    [Header("huud")]
+    [SerializeField] private Transform trappedParent;
+    [SerializeField] private Transform freedParent;
+    [SerializeField] private Sprite caughtIMG;
+    [SerializeField] private Sprite freeIMG;
+    [SerializeField] private Image prefab;
+    private Dictionary<AiAndChicken, Image> _underscoreIsLowercaseHudChickens = new();
+    public static HUD Instance
+    {
+        get; private set;
     }
     private MoveNow _owner;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,4 +52,20 @@ public class HUD : MonoBehaviour
         cluck.SetTargetAbility(player.GetClucking());
         glih.SetTargetAbility(player.GetGLIH());
     }
+    public void RegisterChicken(Checkin checkin)
+    {
+
+    }
+    public void DeRegisterChicken(Checkin checkin)
+    {
+
+    }
+    private void CaughtChicken(Image target)
+    {
+
+    } 
+    private void FreeChicken(Image target)
+    {
+        
+    } 
 }

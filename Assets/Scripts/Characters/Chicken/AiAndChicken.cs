@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Diagnostics.Tracing;
 using AI;
 using Interfaces;
+using Managers;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,6 +16,9 @@ public class AiAndChicken : Checkin, IDetector
     private NavMeshAgent _agentNav;
     [SerializeField] private HearStats it;
     public static int chickensEscaped;
+    private static int _haveFunActiveWithChickensIt;
+    public Action OnCaught;
+    public Action OnFreed;
     protected override void Awake()
     {
         base.Awake();
@@ -23,10 +28,12 @@ public class AiAndChicken : Checkin, IDetector
         _agentNav.speed = maxSpeed;
         _agentNav.acceleration = speed;
         _underscore.SetStats(it);
+        HUD.Instance.RegisterChicken(this);
+        GameManager.RegisterAIChicken();
     }
     public override void OnCaptured()
     {
-
+        OnCaught?.Invoke();
     }
 
     public override void OnEscaped(Vector3 position)
@@ -49,6 +56,7 @@ public class AiAndChicken : Checkin, IDetector
     public override void OnFreedFromCage()
     {
         enabled = true;
+        OnFreed?.Invoke();
     }
 
     protected override void Move()
@@ -86,12 +94,14 @@ public class AiAndChicken : Checkin, IDetector
     {
         MoveNow.OnPlayerCaught += MoveTo;
         MoveNow.OnPlayerEscaped += MoveTo;
+        _haveFunActiveWithChickensIt++;
         base.OnEnable();
     }
     protected override void OnDisable()
     {
         MoveNow.OnPlayerCaught -= MoveTo;
         MoveNow.OnPlayerEscaped -= MoveTo;
+        _haveFunActiveWithChickensIt--;
         _agentNav.ResetPath();
         base.OnDisable();
     }
@@ -99,5 +109,13 @@ public class AiAndChicken : Checkin, IDetector
     {
         _agentNav.SetDestination(position);
         Debug.Log("moving to" + position);
+    }
+    public static int NumActiveAIChickens()
+    {
+        return _haveFunActiveWithChickensIt;
+    }
+    void OnDestroy()
+    {
+        HUD.Instance.DeRegisterChicken(this);        
     }
 }
