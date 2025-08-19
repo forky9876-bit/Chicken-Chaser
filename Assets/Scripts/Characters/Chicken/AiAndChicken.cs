@@ -95,6 +95,7 @@ public class AiAndChicken : Checkin, IDetector
         MoveNow.OnPlayerCaught += MoveTo;
         MoveNow.OnPlayerEscaped += MoveTo;
         _haveFunActiveWithChickensIt++;
+        ScoreManager.Instance.UpdateScore();
         base.OnEnable();
     }
     protected override void OnDisable()
@@ -102,6 +103,7 @@ public class AiAndChicken : Checkin, IDetector
         MoveNow.OnPlayerCaught -= MoveTo;
         MoveNow.OnPlayerEscaped -= MoveTo;
         _haveFunActiveWithChickensIt--;
+        ScoreManager.Instance.UpdateScore();
         _agentNav.ResetPath();
         base.OnDisable();
     }
