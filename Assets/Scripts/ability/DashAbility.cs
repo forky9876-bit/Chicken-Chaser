@@ -72,7 +72,7 @@ public class DashAbility : AbstractAbility
         float curTime = 0;
         //Lock the rigidbody physics
         // _rb.isKinematic = true;
-        _rb.linearVelocity = Vector3.zero;
+        // _rb.linearVelocity = Vector3.zero;
         while (curTime < dashDuration)
         {
             curTime += Time.deltaTime;

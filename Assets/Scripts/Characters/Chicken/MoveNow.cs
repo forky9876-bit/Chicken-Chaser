@@ -111,6 +111,7 @@ public class MoveNow : Checkin
     }
     public override void OnFreedFromCage()
     {
+        enabled = true;
         OnPlayerRescued?.Invoke();
         cluckAbility.StopAbility();
     }
