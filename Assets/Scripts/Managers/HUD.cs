@@ -52,20 +52,27 @@ public class HUD : MonoBehaviour
         cluck.SetTargetAbility(player.GetClucking());
         glih.SetTargetAbility(player.GetGLIH());
     }
-    public void RegisterChicken(Checkin checkin)
+    public void RegisterChicken(AiAndChicken checkin)
     {
-
+        Image cloneOrWhatever = Instantiate(prefab);
+        _underscoreIsLowercaseHudChickens.Add(checkin, cloneOrWhatever);
+        checkin.OnCaught += () => CaughtChicken(cloneOrWhatever);
+        checkin.OnFreed += () => FreeChicken(cloneOrWhatever);
+        CaughtChicken(cloneOrWhatever);
     }
-    public void DeRegisterChicken(Checkin checkin)
+    public void DeRegisterChicken(AiAndChicken checkin)
     {
-
+        Destroy(_underscoreIsLowercaseHudChickens[checkin]);
+        _underscoreIsLowercaseHudChickens.Remove(checkin);
     }
     private void CaughtChicken(Image target)
     {
-
+        target.transform.SetParent(trappedParent, worldPositionStays:false);
+        target.sprite = caughtIMG;
     } 
     private void FreeChicken(Image target)
     {
-        
+        target.transform.SetParent(freedParent, worldPositionStays:false);
+        target.sprite = freeIMG;
     } 
 }
