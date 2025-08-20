@@ -8,7 +8,7 @@ public abstract class Checkin : MonoBehaviour, IVisualDetectable, ITrappable
 {
     [Header("theTitleForTheseTwoValues")]
     [SerializeField] protected float speed = Mathf.PI * 3f;
-    [SerializeField] protected float maxSpeed = Mathf.PI * 3f;
+    [SerializeField] public float maxSpeed = Mathf.PI * 3f;
     [Header("these are the values")]
     [SerializeField] protected float footRadius = 1;
     [SerializeField] protected float footDistance = 1;
@@ -19,7 +19,7 @@ public abstract class Checkin : MonoBehaviour, IVisualDetectable, ITrappable
     protected Rigidbody jerry;
     protected Animator whatAreWeGoingToCallIt;
     protected bool isGrounded;
-    protected float currentSpeed;
+    public float currentSpeed;
     protected float currentFallTime;
     protected float visibility = 1;
     protected Vector3 slopeNormal;
