@@ -19,6 +19,7 @@ public class MoveNow : Checkin
     [SerializeField] private AbstractAbility dashAbility;
     [SerializeField] private AbstractAbility cluckAbility;
     [SerializeField] private AbstractAbility glihAbility;
+    [SerializeField] private GameObject or;
     // Awake is called once before before the first execution of Update after the MonoBehaviour is created
     protected override void Awake()
     {
@@ -167,5 +168,10 @@ public class MoveNow : Checkin
     {
         base.OnEnable();
         PIayerControIs.UseGameControls();
+    }
+    protected override void SetComponentsActive(bool active)
+    {
+        base.SetComponentsActive(active);
+        or.SetActive(!active);
     }
 }

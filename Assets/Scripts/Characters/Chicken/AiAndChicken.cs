@@ -42,6 +42,7 @@ public class AiAndChicken : Checkin, IDetector
         MoveTo(position);
         visibility = 0;
         chickensEscaped++;
+        GameManager.RegisterAIEscape();
         StartCoroutine(CheckForEscape());
 
     }
@@ -56,6 +57,7 @@ public class AiAndChicken : Checkin, IDetector
     public override void OnFreedFromCage()
     {
         enabled = true;
+        _agentNav.enabled = false;
         OnFreed?.Invoke();
     }
 
@@ -118,6 +120,14 @@ public class AiAndChicken : Checkin, IDetector
     }
     void OnDestroy()
     {
-        HUD.Instance.DeRegisterChicken(this);        
+        HUD.Instance.DeRegisterChicken(this);
+    }
+    protected override void HandleGroundState()
+    {
+        base.HandleGroundState();
+        if (isGrounded && !_agentNav.enabled)
+        {
+            _agentNav.enabled = true;
+        }
     }
 }

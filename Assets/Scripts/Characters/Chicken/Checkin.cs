@@ -38,7 +38,7 @@ public abstract class Checkin : MonoBehaviour, IVisualDetectable, ITrappable
         AsLongAsItHasTheWordAnimationOrAnimsOrSomethingLikeThat();
     }
     protected abstract void Move();
-    private void HandleGroundState()
+    protected virtual void HandleGroundState()
     {
         bool didWeHitSomethingIDontKnow = Physics.SphereCast(andThisOneIsGoingToBeForOurFeet.position, footRadius, Vector3.down, out RaycastHit slope, footDistance, StaticUtilities.GroundLayers);
         if (didWeHitSomethingIDontKnow != isGrounded)
