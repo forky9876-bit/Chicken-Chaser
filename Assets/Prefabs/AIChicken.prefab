@@ -166,6 +166,7 @@ MonoBehaviour:
   footDistance: 0.75
   asLongAsItHasTheWordHeadInItItIsFine: {fileID: 2734304907029226763}
   andThisOneIsGoingToBeForOurFeet: {fileID: 821473674308985966}
+  currentSpeed: 0
   it: {fileID: 11400000, guid: bea74cc03f6df55409ece03fb1d40aba, type: 2}
 --- !u!1 &8273480113772969671
 GameObject:
@@ -418,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 1771836925857482937, guid: 70c862bc985975547b6e20d5e1c01aea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.239
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1771836925857482937, guid: 70c862bc985975547b6e20d5e1c01aea,
         type: 3}

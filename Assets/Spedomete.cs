@@ -1,17 +1,19 @@
-using Unity.Mathematics;
-using UnityEditor;
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Spedomete : MonoBehaviour
 {
     [SerializeField] Checkin checkin;
-    [SerializeField] Quaternion q;
-    [SerializeField] Vector3 v;
+    [SerializeField] float min = -180;
+    [SerializeField] float max = 180;
+    [SerializeField] float offset = 90;
 
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = quaternion.Euler(0, 0, checkin.currentSpeed/checkin.maxSpeed*3);
+        float percentage = checkin.currentSpeed / checkin.maxSpeed;
+        float angle = Mathf.Lerp(-min, -max, percentage) + offset;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }

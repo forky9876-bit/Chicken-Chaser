@@ -287,6 +287,7 @@ MonoBehaviour:
   footDistance: 0.75
   asLongAsItHasTheWordHeadInItItIsFine: {fileID: 2734304907029226763}
   andThisOneIsGoingToBeForOurFeet: {fileID: 821473674308985966}
+  currentSpeed: 0
   ylookSpeedski: 5
   andThisIsOurPitchLimitSo: 75
   jumpAbility: {fileID: 6297947706847276491}
@@ -706,12 +707,12 @@ PrefabInstance:
     - target: {fileID: 1771836925857482937, guid: 70c862bc985975547b6e20d5e1c01aea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.239
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1771836925857482937, guid: 70c862bc985975547b6e20d5e1c01aea,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: 1771836925857482937, guid: 70c862bc985975547b6e20d5e1c01aea,
         type: 3}
