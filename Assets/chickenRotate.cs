@@ -18,12 +18,18 @@ public class chickenRotate : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 roat = new Vector3(jerry.linearVelocity.z, 0, -jerry.linearVelocity.x);
+        Vector3 velociraptor = GetStuff();
+        Vector3 roat = new Vector3(velociraptor.z, 0, -velociraptor.x);
         transform.Rotate(roat * Time.fixedDeltaTime * rotSpede, Space.World);
     }
     Vector3 GetStuff()
     {
-        return _usesAgent ? antidisestablishmentarianistically.velocity : jerry.linearVelocity;
+        Vector3 velociraptor = jerry.linearVelocity;
+        if (_usesAgent)
+        {
+            velociraptor += antidisestablishmentarianistically.velocity;
+        }
+        return velociraptor;
     }
     
 }

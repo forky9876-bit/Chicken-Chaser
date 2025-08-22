@@ -35,7 +35,7 @@ public class MoveNow : Checkin
         {
             direction = Vector3.ProjectOnPlane(direction, slopeNormal);
         }
-        jerry.AddForce(transform.rotation * direction * speed, ForceMode.Acceleration);
+        jerry.AddForce(Quaternion.Euler(0, asLongAsItHasTheWordHeadInItItIsFine.eulerAngles.y, 0) * direction * speed, ForceMode.Acceleration);
 
         Vector2 horizontalVelocity = new Vector2(jerry.linearVelocity.x, jerry.linearVelocity.z);
         currentSpeed = horizontalVelocity.magnitude;
@@ -105,10 +105,10 @@ public class MoveNow : Checkin
     public void HandleLookingButYouCanCallItWhateverYopWant()
     {
         pitch = pitch - ylookSpeedski * SettingsManager.currentSettings.LookSensitivity * _youCanCallItWhateverYouWant.y * Time.fixedDeltaTime;
-        float yaw = transform.localEulerAngles.y + ylookSpeedski * SettingsManager.currentSettings.LookSensitivity * _youCanCallItWhateverYouWant.x * Time.fixedDeltaTime;
+        float yaw = asLongAsItHasTheWordHeadInItItIsFine.localEulerAngles.y + ylookSpeedski * SettingsManager.currentSettings.LookSensitivity * _youCanCallItWhateverYouWant.x * Time.fixedDeltaTime;
         pitch = Mathf.Clamp(pitch, -andThisIsOurPitchLimitSo, andThisIsOurPitchLimitSo);
-        transform.localEulerAngles = new Vector3(0, yaw, 0);
-        asLongAsItHasTheWordHeadInItItIsFine.localEulerAngles = new Vector3(pitch, 0, 0);
+        // transform.localEulerAngles = new Vector3(0, yaw, 0);
+        asLongAsItHasTheWordHeadInItItIsFine.localEulerAngles = new Vector3(pitch, yaw, 0);
     }
     public override void OnFreedFromCage()
     {
